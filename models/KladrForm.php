@@ -60,8 +60,7 @@ class KladrForm extends Model
             $query->ContentName = $this->address;
             $query->OneString = TRUE;
             $query->Limit     = $limit;
-            $arResult = $api->QueryToArray($query);
-            return is_array($arResult) ? $arResult : 'Совпадений не найдено';
+            return  $api->QueryToArray($query);
         }
         return false;
     }

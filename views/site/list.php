@@ -15,13 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <div>
-        <ul>
-            <?php foreach($results as $res): ?>
-                <li>
-                    <?= Html::encode($res['fullName']) ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php  if(is_array($results) && !empty($results)) :?>
+            <ul>
+                <?php foreach($results as $res): ?>
+                    <li>
+                        <?= Html::encode($res['fullName']) ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            Совпадений не найдено
+        <?php endif; ?>
 
     </div>
 </div>
