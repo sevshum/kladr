@@ -25,6 +25,7 @@ class KladrForm extends Model
         return [
             // username and password are both required
             [['address'], 'required'],
+            [['address'], 'trim'],
         ];
     }
 
