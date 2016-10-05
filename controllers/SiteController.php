@@ -63,6 +63,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $lastRequests = Yii::$app->cache->delete(Request::LAST_REQUESTS);
         $res = '';
         $model = new KladrForm();
         if ($model->load(Yii::$app->request->post())) {
