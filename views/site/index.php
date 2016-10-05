@@ -36,4 +36,19 @@ $this->title = 'My Yii Application';
     <div class="col-lg-offset-1" style="color:#999;">
         <?= Html::encode($res) ?>
     </div>
+
+    <div>
+        <h2>Последние <?= \app\models\Request::LAST_REQ_LIMIT ?> запросов</h2>
+        <ul>
+            <?php foreach(\app\models\Request::getLastRequestsWithScores() as $address => $score): ?>
+                <li>
+                    <?= Html::encode($address) ?> <span class="badge"> <?= Html::encode($score) ?> </span>
+                    <?= Html::a('Ссылка', ['site/list', 'id' => Html::encode($address)]) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+
+    </div>
+</div>
+
 </div>

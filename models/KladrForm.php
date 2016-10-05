@@ -32,7 +32,7 @@ class KladrForm extends Model
      * Find address in KLADR
      * @return array
      */
-    public function find()
+    public function findOneRes()
     {
         if ($this->validate()) {
             $api = new Kladr\Api(Yii::$app->params['kladrToken'], Yii::$app->params['kladrKey']);
@@ -41,9 +41,27 @@ class KladrForm extends Model
             $query->OneString = TRUE;
             $query->Limit     = 1;
             $arResult = $api->QueryToArray($query);
+            Request::handleNew($this->address);
             return is_array($arResult) && isset($arResult[0]['fullName']) ? $arResult[0]['fullName'] : 'Совпадений не найдено';
         }
         return false;
     }
 
+    /**
+     * Find address in KLADR
+     * @return array
+     */
+    public function findAllRes($limit = 10)
+    {
+        if ($this->validate()) {
+            $api = new Kladr\Api(Yii::$app->params['kladrToken'], Yii::$app->params['kladrKey']);
+            $query = new Kladr\Query();
+            $query->ContentName = $this->address;
+            $query->OneString = TRUE;
+            $query->Limit     = $limit;
+            $arResult = $api->QueryToArray($query);
+            return is_array($arResult) ? $arResult : 'Совпадений не найдено';
+        }
+        return false;
+    }
 }

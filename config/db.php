@@ -1,8 +1,8 @@
 <?php
-
+$_fn=realpath(__DIR__."/../data")."/data.db";
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'dsn' => "sqlite:$_fn",
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
