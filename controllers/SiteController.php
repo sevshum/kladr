@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\KladrForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +62,27 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+//        $api = new Kladr\Api(Yii::$app->params['kladrToken'], Yii::$app->params['kladrKey']);
+
+//        $query              = new Kladr\Query();
+//        $query->ContentName = 'moc';
+//
+//        $query->OneString = TRUE;
+//        $query->Limit     = 1;
+//
+//
+//        $arResult = $api->QueryToArray($query);
+//
+//        print '<pre>';
+//        var_dump($arResult);
+//        print '</pre>';
+//        exit;
+        $res = '';
+        $model = new KladrForm();
+        if ($model->load(Yii::$app->request->post())) {
+            $res = $model->find();
+        }
+        return $this->render('index', ['model' => $model, 'res' => $res]);
     }
 
     /**
